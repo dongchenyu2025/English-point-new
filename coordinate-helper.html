@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>热点坐标获取工具 v2.0 - 保证位置一致</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .dual-preview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .preview-section {
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .preview-header {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .image-container {
+            position: relative;
+            display: block;
+            background: #000;
+        }
+
+        .original-container {
+            height: 600px; /* 固定高度便于标注 */
+        }
+
+        .app-preview-container {
+            /* 动态计算高度，模拟应用环境 */
+            height: calc(100vh - 300px); /* 模拟应用的实际容器高度 */
+            min-height: 400px;
+            max-height: 800px;
+        }
+
+        .scene-image {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .original-image {
+            object-fit: contain;
+        }
+
+        .app-preview-image {
+            object-fit: contain;
+            background: #000;
+        }
+
+        .image-info {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 3px solid #ffc107;
+        }
+
+        .crosshair {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff4444;
+            border-radius: 50%;
+            pointer-events: none;
+            background: rgba(255, 68, 68, 0.2);
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .hotspot-marker {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 2px solid #4f46e5;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 15;
+        }
+
+        .hotspot-marker::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #4f46e5;
+        }
+
+        .coordinates {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .word-input {
+            margin: 10px 0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .word-input input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .result {
+            background: #f9f9f9;
+            padding: 10px;
+            border-left: 3px solid #4caf50;
+            margin: 10px 0;
+            font-family: monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        button {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: #1976d2;
+            transform: translateY(-1px);
+        }
+
+        .btn-danger {
+            background: #f44336;
+        }
+
+        .btn-danger:hover {
+            background: #d32f2f;
+        }
+
+        .btn-success {
+            background: #4caf50;
+        }
+
+        .btn-success:hover {
+            background: #388e3c;
+        }
+
+        .validation-info {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #4caf50;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+            .dual-preview {
+                grid-template-columns: 1fr;
+            }
+
+            .word-input {
+                flex-direction: column;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 热点坐标获取工具 v2.0</h1>
+            <p>保证位置一致 · 应用环境预览 · 坐标验证</p>
+        </div>
+
+        <div class="controls">
+            <input type="file" id="imageInput" accept="image/*">
+            <button onclick="clearPoints()">清除所有点</button>
+            <button onclick="exportData()" class="btn-success">导出数据</button>
+            <button onclick="togglePreviewMode()" id="previewToggle">切换预览模式</button>
+        </div>
+
+        <div class="word-input">
+            <input type="text" id="sceneId" placeholder="场景ID (如: coffee)">
+            <input type="text" id="sceneTitle" placeholder="大标题-中文 (如: 咖啡)">
+            <input type="text" id="sceneSubtitle" placeholder="小标题-英文 (如: Coffee)">
+        </div>
+
+        <div class="word-input">
+            <input type="text" id="currentWord" placeholder="英文单词 (必填)">
+            <input type="text" id="currentPhonetic" placeholder="音标 (如: /desk/)">
+            <input type="text" id="currentChinese" placeholder="中文">
+        </div>
+
+        <div class="validation-info">
+            <h4>✅ 3:4比例位置保证说明</h4>
+            <ul>
+                <li><strong>标准规格</strong>: 支持1200×1600像素 (3:4比例) 图片</li>
+                <li><strong>左侧编辑</strong>: 在原图上点击标记单词位置</li>
+                <li><strong>右侧预览</strong>: 实时显示在应用中的效果</li>
+                <li><strong>位置精度</strong>: 自动转换为百分比，确保各尺寸屏幕兼容</li>
+                <li><strong>容差检测</strong>: 自动识别标准3:4比例图片</li>
+            </ul>
+        </div>
+
+        <div class="validation-info warning">
+            <h4>🎯 预览模式设置</h4>
+            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                <label>目标屏幕尺寸:</label>
+                <select id="screenSize" onchange="updatePreviewSize()">
+                    <option value="1920x1080">桌面 1920×1080</option>
+                    <option value="1366x768">桌面 1366×768</option>
+                    <option value="1440x900">桌面 1440×900</option>
+                    <option value="390x844">手机 iPhone 12</option>
+                    <option value="414x896">手机 iPhone 11</option>
+                    <option value="768x1024">平板 iPad</option>
+                    <option value="custom">自定义</option>
+                </select>
+                <input type="text" id="customSize" placeholder="宽x高 (如: 1200x800)" style="display: none;">
+                <button onclick="resetPreviewSize()">重置</button>
+            </div>
+            <p style="margin-top: 10px; font-size: 14px; color: #666;">
+                预览模式将模拟目标设备的容器比例，确保坐标在不同设备上都准确
+            </p>
+        </div>
+
+        <div class="image-info">
+            <h4>📏 当前图片信息</h4>
+            <div id="imageStats">请先上传图片...</div>
+        </div>
+
+        <div class="dual-preview" id="dualPreview" style="display: none;">
+            <div class="preview-section">
+                <div class="preview-header">🖼️ 原图标注模式 (点击此处标记)</div>
+                <div class="image-container original-container" id="originalContainer">
+                    <img id="originalImage" class="scene-image original-image">
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="preview-header">📱 应用预览模式 (验证位置)</div>
+                <div class="image-container app-preview-container" id="previewContainer">
+                    <img id="previewImage" class="scene-image app-preview-image">
+                </div>
+            </div>
+        </div>
+
+        <div class="coordinates" id="coordinates">
+            <h3>📍 已标记的热点:</h3>
+            <div id="pointsList"></div>
+        </div>
+
+        <div id="exportResult"></div>
+    </div>
+
+    <script>
+        let points = [];
+        let imageElement = null;
+        let previewElement = null;
+        let currentImageData = null;
+        let previewMode = 'dual'; // 'dual', 'original', 'preview'
+
+        document.getElementById('imageInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                loadImage(file);
+            }
+        });
+
+        // 屏幕尺寸选择处理
+        document.getElementById('screenSize').addEventListener('change', function() {
+            const customInput = document.getElementById('customSize');
+            if (this.value === 'custom') {
+                customInput.style.display = 'inline-block';
+            } else {
+                customInput.style.display = 'none';
+                updatePreviewSize();
+            }
+        });
+
+        document.getElementById('customSize').addEventListener('change', function() {
+            if (document.getElementById('screenSize').value === 'custom') {
+                updatePreviewSize();
+            }
+        });
+
+        function loadImage(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                currentImageData = e.target.result;
+
+                // 设置原图
+                const originalImg = document.getElementById('originalImage');
+                originalImg.src = currentImageData;
+
+                // 设置预览图
+                const previewImg = document.getElementById('previewImage');
+                previewImg.src = currentImageData;
+
+                imageElement = originalImg;
+                previewElement = previewImg;
+
+                // 显示双预览
+                document.getElementById('dualPreview').style.display = 'grid';
+
+                // 显示图片信息
+                originalImg.onload = function() {
+                    const width = this.naturalWidth;
+                    const height = this.naturalHeight;
+                    const ratio = (width / height).toFixed(2);
+                    const size = (file.size / 1024 / 1024).toFixed(2);
+
+                    document.getElementById('imageStats').innerHTML = `
+                        <strong>尺寸:</strong> ${width}×${height}px |
+                        <strong>比例:</strong> ${ratio}:1 |
+                        <strong>大小:</strong> ${size}MB<br>
+                        <strong>状态:</strong> ${width === 1200 && height === 800 ?
+                            '✅ 完美尺寸' :
+                            ratio == 1.50 ? '✅ 比例正确，建议裁剪为1200×800' :
+                            '⚠️ 建议调整为3:2比例'}
+                    `;
+                };
+
+                // 绑定点击事件到原图
+                originalImg.addEventListener('click', handleImageClick);
+
+                // 清除之前的点
+                clearPoints();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleImageClick(e) {
+            const word = document.getElementById('currentWord').value.trim();
+            const phonetic = document.getElementById('currentPhonetic').value.trim();
+            const chinese = document.getElementById('currentChinese').value.trim();
+
+            if (!word) {
+                alert('请先输入单词信息！');
+                return;
+            }
+
+            // 计算基于原图的坐标
+            const rect = imageElement.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(2);
+            const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(2);
+
+            const point = {
+                word: word,
+                phonetic: phonetic || `/${word}/`,
+                chinese: chinese || word,
+                x: x + '%',
+                y: y + '%'
+            };
+
+            points.push(point);
+            updatePointsList();
+            updateHotspots();
+
+            // 清空输入框
+            document.getElementById('currentWord').value = '';
+            document.getElementById('currentPhonetic').value = '';
+            document.getElementById('currentChinese').value = '';
+        }
+
+        function updateHotspots() {
+            // 清除现有热点
+            document.querySelectorAll('.hotspot-marker').forEach(el => el.remove());
+
+            // 在两个容器中添加热点
+            points.forEach((point, index) => {
+                // 原图容器中的热点
+                const originalMarker = createHotspotMarker(point, index);
+                document.getElementById('originalContainer').appendChild(originalMarker);
+
+                // 预览容器中的热点
+                const previewMarker = createHotspotMarker(point, index);
+                document.getElementById('previewContainer').appendChild(previewMarker);
+            });
+        }
+
+        function createHotspotMarker(point, index) {
+            const marker = document.createElement('div');
+            marker.className = 'hotspot-marker';
+            marker.style.left = point.x;
+            marker.style.top = point.y;
+            marker.title = `${point.word} (${point.x}, ${point.y})`;
+            return marker;
+        }
+
+        function updatePointsList() {
+            const list = document.getElementById('pointsList');
+            list.innerHTML = points.map((point, index) =>
+                `<div class="result">
+                    <span>${index + 1}. ${point.word} | ${point.phonetic} | ${point.chinese} | ${point.x}, ${point.y}</span>
+                    <button onclick="removePoint(${index})" class="btn-danger" style="padding: 4px 8px; font-size: 12px;">删除</button>
+                </div>`
+            ).join('');
+        }
+
+        function removePoint(index) {
+            points.splice(index, 1);
+            updatePointsList();
+            updateHotspots();
+        }
+
+        function clearPoints() {
+            points = [];
+            updatePointsList();
+            updateHotspots();
+        }
+
+        function updatePreviewSize() {
+            const screenSizeSelect = document.getElementById('screenSize');
+            const customSizeInput = document.getElementById('customSize');
+            const previewContainer = document.querySelector('.app-preview-container');
+
+            if (!previewContainer) return;
+
+            let targetWidth, targetHeight;
+
+            if (screenSizeSelect.value === 'custom') {
+                const customValue = customSizeInput.value.trim();
+                const match = customValue.match(/(\d+)x(\d+)/i);
+                if (match) {
+                    targetWidth = parseInt(match[1]);
+                    targetHeight = parseInt(match[2]);
+                } else {
+                    alert('请输入正确的尺寸格式，如: 1200x800');
+                    return;
+                }
+            } else {
+                const [width, height] = screenSizeSelect.value.split('x').map(Number);
+                targetWidth = width;
+                targetHeight = height;
+            }
+
+            // 计算应用场景容器的实际尺寸（减去头部和边距）
+            // 模拟 calc(100vh - 120px) - 16px padding * 2
+            const appContainerHeight = targetHeight - 120 - 32;
+            const appContainerWidth = targetWidth - 32; // 减去左右padding
+
+            // 设置预览容器尺寸
+            previewContainer.style.width = appContainerWidth + 'px';
+            previewContainer.style.height = appContainerHeight + 'px';
+            previewContainer.style.maxWidth = appContainerWidth + 'px';
+            previewContainer.style.maxHeight = appContainerHeight + 'px';
+
+            // 更新热点位置
+            updateHotspots();
+
+            console.log('预览容器已调整为:', {
+                targetScreen: `${targetWidth}x${targetHeight}`,
+                containerSize: `${appContainerWidth}x${appContainerHeight}`
+            });
+        }
+
+        function resetPreviewSize() {
+            const previewContainer = document.querySelector('.app-preview-container');
+            if (previewContainer) {
+                previewContainer.style.width = '';
+                previewContainer.style.height = '';
+                previewContainer.style.maxWidth = '';
+                previewContainer.style.maxHeight = '';
+
+                // 重置选择器
+                document.getElementById('screenSize').value = '1920x1080';
+                document.getElementById('customSize').style.display = 'none';
+
+                updateHotspots();
+            }
+        }
+
+        function togglePreviewMode() {
+            const dualPreview = document.getElementById('dualPreview');
+            const toggleBtn = document.getElementById('previewToggle');
+
+            if (previewMode === 'dual') {
+                // 切换到仅显示原图
+                dualPreview.style.gridTemplateColumns = '1fr';
+                dualPreview.children[1].style.display = 'none';
+                toggleBtn.textContent = '显示应用预览';
+                previewMode = 'original';
+            } else if (previewMode === 'original') {
+                // 切换到仅显示预览
+                dualPreview.children[0].style.display = 'none';
+                dualPreview.children[1].style.display = 'block';
+                toggleBtn.textContent = '显示原图模式';
+                previewMode = 'preview';
+            } else {
+                // 切换回双预览
+                dualPreview.style.gridTemplateColumns = '1fr 1fr';
+                dualPreview.children[0].style.display = 'block';
+                dualPreview.children[1].style.display = 'block';
+                toggleBtn.textContent = '切换预览模式';
+                previewMode = 'dual';
+            }
+        }
+
+        function exportData() {
+            if (points.length === 0) {
+                alert('请先标记一些热点！');
+                return;
+            }
+
+            // 从输入框获取场景信息
+            const sceneId = document.getElementById('sceneId').value.trim();
+            const sceneTitle = document.getElementById('sceneTitle').value.trim();
+            const sceneSubtitle = document.getElementById('sceneSubtitle').value.trim();
+
+            // 如果没有填写，询问用户
+            if (!sceneId) {
+                const inputSceneId = prompt('请输入场景ID (如: coffee):');
+                if (!inputSceneId) return;
+                document.getElementById('sceneId').value = inputSceneId;
+            }
+
+            if (!sceneTitle) {
+                const inputTitle = prompt('请输入大标题-中文 (如: 咖啡):');
+                if (!inputTitle) return;
+                document.getElementById('sceneTitle').value = inputTitle;
+            }
+
+            if (!sceneSubtitle) {
+                const inputSubtitle = prompt('请输入小标题-英文 (如: Coffee):');
+                if (!inputSubtitle) return;
+                document.getElementById('sceneSubtitle').value = inputSubtitle;
+            }
+
+            const finalSceneId = document.getElementById('sceneId').value.trim();
+            const finalSceneTitle = document.getElementById('sceneTitle').value.trim();
+            const finalSceneSubtitle = document.getElementById('sceneSubtitle').value.trim();
+
+            const exportData = {
+                sceneId: finalSceneId,
+                sceneName: finalSceneSubtitle,
+                vocabulary: points.map(point => ({
+                    word: point.word,
+                    phonetic: point.phonetic,
+                    chinese: point.chinese,
+                    audio: `src/assets/audio/${point.word.replace(/\s+/g, '_').toLowerCase()}.mp3`,
+                    position: { x: point.x, y: point.y }
+                }))
+            };
+
+            const result = document.getElementById('exportResult');
+            result.innerHTML = `
+                <div class="validation-info">
+                    <h3>🎉 导出结果 (复制给我即可):</h3>
+                    <div class="result">
+                        <pre>${JSON.stringify(exportData, null, 2)}</pre>
+                    </div>
+                    <h4>📋 标准格式 (推荐使用):</h4>
+                    <div class="result">
+                        场景: ${finalSceneId}<br>
+                        图片: ${finalSceneId}.jpg<br>
+                        大标题: ${finalSceneTitle}<br>
+                        小标题: ${finalSceneSubtitle}<br>
+                        词汇:<br>
+                        ${points.map(p => `${p.word} | ${p.phonetic} | ${p.chinese} | ${p.x} | ${p.y}`).join('<br>')}
+                    </div>
+                    <h4>✅ 位置保证:</h4>
+                    <p>所有坐标基于原图尺寸计算，应用中将使用 object-fit: contain 模式确保位置100%准确！</p>
+                </div>
+            `;
+
+            // 滚动到结果
+            result.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

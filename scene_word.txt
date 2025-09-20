@@ -1,0 +1,64 @@
+场景: kitchen
+图片: kitchen.jpg
+大标题: 厨房
+小标题: Kitchen
+词汇:
+oven | /oven/ | oven | 30.07% | 27.50%
+pendant light | /pendant light/ | pendant light | 61.96% | 22.08%
+stove | /stove/ | stove | 71.98% | 44.16%
+kitchen island | /kitchen island/ | kitchen island | 36.75% | 55.25%
+stool | /stool/ | stool | 61.66% | 81.83%
+
+场景: living
+图片: living.jpg
+大标题: 客厅
+小标题: Living Room
+词汇:
+Cushion | /ˈkʊʃən/ | 靠垫 | 69.46% | 57.33%
+Blanket | /ˈblæŋkɪt/ | 毯子 | 63.63% | 79.91%
+Blind | /blaɪnd/ | 窗帘/卷帘 | 70.19% | 34.08%
+Shelf | /ʃɛlf/ | 架子 | 27.92% | 37.41%
+Rug | /rʌɡ/ | 地毯 | 28.94% | 82.66%
+Washing machine | /ˈwɑːʃɪŋ məˌʃiːn/ | 洗衣机 | 53.99% | 34.00%
+
+场景: park
+图片: park.jpg
+大标题: 公园
+小标题: Park
+词汇:
+Bench | /bɛntʃ/ | 长椅 | 39.03% | 71.91%
+Fountain | /ˈfaʊntɪn/ | 喷泉 | 38.12% | 46.83%
+Swing | /swɪŋ/ | 秋千 | 20.80% | 55.41%
+Slide | /slaɪd/ | 滑梯 | 75.63% | 52.16%
+Lawn | /lɔːn/ | 草坪 | 61.05% | 57.16%
+
+场景: desk
+图片: desk.jpg
+大标题: 工作桌
+小标题: Desk
+词汇:
+Monitor | /ˈmɒnɪtər/ | 显示器 | 65.91% | 58.83%
+Keyboard | /ˈkiːbɔːrd/ | 键盘 | 49.81% | 89.75%
+Mouse | /maʊs/ | 鼠标 | 78.66% | 92.16%
+Headphones | /ˈhɛdˌfoʊnz/ | 耳机 | 24.45% | 63.00%
+Calendar | /ˈkæləndər/ | 日历 | 26.42% | 86.00%
+
+场景: coffee
+图片: coffee.jpg
+大标题: 咖啡
+小标题: Coffee
+词汇:
+Dirty Coffee | /ˈdɜːrti ˈkɒfi/ | 脏咖啡 | 33.71% | 64.33%
+Latte | /ˈlɑːteɪ/ | 拿铁 | 59.98% | 72.50%
+Americano | /mɛrɪˈkɑːnoʊ/ | 美式咖啡 | 55.28% | 31.58%
+
+场景: supermarket
+图片: supermarket.jpg
+大标题: 超市
+小标题: Supermarket
+词汇:
+Lettuce | /ˈlɛtəs/ | 生菜 | 34.91% | 18.66%
+Cucumber | /ˈkjuːkʌmbər/ | 黄瓜 | 30.10% | 52.66%
+Bell pepper | /ˈbɛl ˌpɛpər/ | 甜椒 | 58.97% | 42.41%
+Cabbage | /ˈkæbɪdʒ/ | 卷心菜 | 70.48% | 86.50%
+Eggplant | /ˈɛɡˌplænt/ | 茄子 | 33.89% | 63.16%

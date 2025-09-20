@@ -1,0 +1,485 @@
+/* Scene page specific styles - 基于 index-2.html 优化 */
+
+/* 场景页面容器 - 添加到主容器样式中 */
+#scenepage {
+    background: white;
+}
+
+.scene-header {
+    padding: 16px;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.back-button {
+    padding: 10px 16px;
+    background: #f3f4f6;
+    color: #374151;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.back-button:hover {
+    background: #e5e7eb;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.scene-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+#scene-title {
+    font-size: 24px;
+    color: #111827;
+    font-weight: 700;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+/* 桌面端：控制按钮和筛选标签在同一行 */
+.controls-and-filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.word-filters {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+}
+
+.display-controls {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+/* 放大按钮尺寸，提升沉浸感 */
+.filter-tab {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    background: #f3f4f6;
+    color: #374151;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 100px;
+    justify-content: center;
+}
+
+.filter-tab:hover {
+    background: #e5e7eb;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filter-tab.active {
+    background: #4f46e5;
+    color: white;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.filter-label {
+    font-weight: 600;
+}
+
+.filter-count {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 14px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.filter-tab.active .filter-count {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.display-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    background: #f3f4f6;
+    color: #374151;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 60px;
+}
+
+.display-btn:hover {
+    background: #e5e7eb;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.display-btn.active {
+    background: #10b981;
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* 场景容器 - 优化布局，为3:4图片卡片留出空间 */
+.scene-container {
+    position: relative;
+    height: calc(100vh - 140px);
+    overflow: hidden;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 3:4比例图片卡片容器 - 自适应高度，不强制裁剪 */
+.scene-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px; /* 桌面端最大宽度 */
+    margin: 0 auto;
+
+    /* 卡片样式 */
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+
+    /* 模糊阴影效果 */
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.1),
+        0 8px 25px rgba(0, 0, 0, 0.08),
+        0 3px 10px rgba(0, 0, 0, 0.05);
+
+    /* 悬浮效果 */
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scene-image-container:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.12),
+        0 12px 35px rgba(0, 0, 0, 0.1),
+        0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+#scene-image {
+    width: 100%;
+    height: auto; /* 高度自适应，保持图片原始比例 */
+    max-height: 90vh; /* 最大高度限制，避免超出屏幕 */
+    object-fit: contain; /* 默认使用contain，确保图片完整显示 */
+    object-position: center;
+    display: block;
+    background: #f8fafc;
+    transition: transform 0.4s ease;
+}
+
+/* 针对非标准比例图片的智能裁剪 */
+.scene-image-container[data-aspect="non-standard"] #scene-image {
+    height: 100%;
+    aspect-ratio: 3/4; /* 只对非标准图片强制比例 */
+    object-fit: cover; /* 非标准图片使用裁剪模式 */
+}
+
+/* 确保标准3:4图片完整显示 */
+.scene-image-container[data-aspect="3-4"] #scene-image {
+    object-fit: contain; /* 标准图片完整显示 */
+    background: transparent;
+}
+
+#hotspots-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* 热点样式 - 确保与 WordMarking.css 兼容 */
+.hotspot {
+    position: absolute;
+    pointer-events: all;
+    cursor: pointer;
+    z-index: 10;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Word display labels - 优化为更紧凑且更靠近热点 */
+.word-label {
+    position: absolute;
+    background: #374151;
+    color: white;
+    padding: 4px 8px; /* 更紧凑的内边距 (从6px 12px改为4px 8px) */
+    border-radius: 6px; /* 更小的圆角 (从8px改为6px) */
+    font-size: 12px; /* 更小的字体 (从14px改为12px) */
+    font-weight: 500;
+    white-space: nowrap;
+    transform: translateX(-50%) translateY(-25px); /* 默认更靠近热点 (从-35px改为-25px) */
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 20;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15); /* 更轻的阴影 */
+    line-height: 1.2; /* 更紧凑的行高 */
+}
+
+.word-label.show {
+    opacity: 1;
+}
+
+/* 不同类型标签的样式 */
+.word-label:nth-child(3) {
+    /* Phonetic label */
+    background: #4f46e5;
+}
+
+.word-label:nth-child(4) {
+    /* English label */
+    background: #10b981;
+}
+
+.word-label:nth-child(5) {
+    /* Chinese label */
+    background: #f59e0b;
+}
+
+/* Loading indicator styles */
+.loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    pointer-events: none;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(79, 70, 229, 0.2);
+    border-top: 3px solid #4f46e5;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 12px;
+}
+
+.loading-text {
+    color: #4f46e5;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Mobile responsive */
+@media (max-width: 1024px) {
+    /* 平板端：保持两行布局，但优化间距 */
+    .controls-and-filters {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .word-filters {
+        order: 1;
+        justify-content: center;
+    }
+
+    .display-controls {
+        order: 2;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .filter-tab {
+        padding: 10px 16px;
+        font-size: 15px;
+        min-width: 80px;
+    }
+
+    .display-btn {
+        padding: 8px 14px;
+        font-size: 14px;
+        min-width: 55px;
+    }
+
+    #scene-title {
+        font-size: 22px;
+    }
+
+    .scene-container {
+        height: auto; /* 自适应高度 */
+        min-height: calc(100vh - 160px);
+        padding: 16px;
+    }
+
+    .scene-image-container {
+        max-width: 450px; /* 平板端适中尺寸 */
+        border-radius: 16px;
+        box-shadow:
+            0 15px 45px rgba(0, 0, 0, 0.08),
+            0 6px 20px rgba(0, 0, 0, 0.06),
+            0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+}
+
+@media (max-width: 768px) {
+    /* 手机端：进一步优化布局 */
+    .scene-header {
+        padding: 12px;
+    }
+
+    .scene-title-row {
+        margin-bottom: 12px;
+    }
+
+    .controls-and-filters {
+        gap: 10px;
+    }
+
+    .word-filters {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .filter-tab {
+        padding: 8px 12px;
+        font-size: 14px;
+        min-width: 70px;
+        flex: 1;
+        min-width: calc(50% - 3px);
+    }
+
+    .display-btn {
+        padding: 7px 12px;
+        font-size: 13px;
+        min-width: 50px;
+        flex: 1;
+    }
+
+    #scene-title {
+        font-size: 20px;
+    }
+
+    .back-button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .scene-container {
+        height: auto; /* 自适应高度 */
+        min-height: calc(100vh - 180px);
+        padding: 12px;
+    }
+
+    .scene-image-container {
+        max-width: 320px; /* 手机端紧凑尺寸 */
+        border-radius: 12px;
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.06),
+            0 4px 15px rgba(0, 0, 0, 0.04),
+            0 1px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    .word-label {
+        font-size: 11px; /* 更小的手机端字体 */
+        padding: 3px 6px; /* 更紧凑的内边距 */
+        transform: translateX(-50%) translateY(-20px); /* 手机端更贴近热点 */
+    }
+}
+
+@media (max-width: 480px) {
+    /* 小屏手机端：最紧凑布局 */
+    .scene-header {
+        padding: 8px;
+    }
+
+    .scene-title-row {
+        margin-bottom: 8px;
+    }
+
+    .controls-and-filters {
+        gap: 8px;
+    }
+
+    .word-filters {
+        gap: 4px;
+    }
+
+    .filter-tab {
+        padding: 6px 8px;
+        font-size: 13px;
+        min-width: calc(50% - 2px);
+    }
+
+    .filter-count {
+        font-size: 12px;
+        padding: 1px 4px;
+    }
+
+    .display-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+        min-width: 45px;
+    }
+
+    #scene-title {
+        font-size: 18px;
+    }
+
+    .back-button {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+
+    .scene-container {
+        height: auto; /* 自适应高度 */
+        min-height: calc(100vh - 200px);
+        padding: 8px;
+    }
+
+    .scene-image-container {
+        max-width: 280px; /* 小屏手机端最小尺寸 */
+        border-radius: 10px;
+    }
+
+    .word-label {
+        font-size: 10px; /* 最小屏幕的最小字体 */
+        padding: 2px 5px; /* 最紧凑的内边距 */
+    }
+}

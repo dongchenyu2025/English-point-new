@@ -1,0 +1,185 @@
+/* Homepage scene cards - 3:4 aspect ratio cards inspired by reference design */
+.scene-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 一行4张卡片 */
+    gap: 24px;
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* 3:4比例场景卡片设计 */
+.scene-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.05);
+    position: relative;
+    aspect-ratio: 3/4; /* 强制3:4比例 */
+    display: flex;
+    flex-direction: column;
+}
+
+.scene-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.12),
+        0 8px 25px rgba(0, 0, 0, 0.08),
+        0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* 卡片图片区域 */
+.scene-card-image {
+    width: 100%;
+    height: 60%; /* 图片占卡片60%高度 */
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scene-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.scene-card:hover .scene-card-image img {
+    transform: scale(1.05);
+}
+
+/* 学习进度标签 - 右上角 */
+.progress-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.progress-0 {
+    background: rgba(148, 163, 184, 0.9); /* 灰色 - 未开始 */
+}
+
+.progress-in-progress {
+    background: rgba(59, 130, 246, 0.9); /* 蓝色 - 学习中 */
+}
+
+.progress-complete {
+    background: rgba(34, 197, 94, 0.9); /* 绿色 - 已完成 */
+}
+
+/* 当没有图片时显示图标 */
+.scene-icon {
+    font-size: 3rem;
+    color: #94a3b8;
+    opacity: 0.7;
+}
+
+/* 卡片内容区域 */
+.scene-card-content {
+    padding: 16px;
+    height: 40%; /* 内容占卡片40%高度 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.scene-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #1e293b;
+    line-height: 1.2;
+    /* 单行文本，超出隐藏 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.scene-card p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.3;
+    margin: 0;
+    /* 单行文本，超出隐藏 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 响应式设计 - 保持4列布局优先 */
+@media (max-width: 1200px) {
+    .scene-grid {
+        grid-template-columns: repeat(3, 1fr); /* 中等屏幕3列 */
+        gap: 20px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .scene-grid {
+        grid-template-columns: repeat(2, 1fr); /* 平板2列 */
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .scene-card h3 {
+        font-size: 16px;
+    }
+
+    .scene-card p {
+        font-size: 13px;
+    }
+
+    .scene-card-content {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .scene-grid {
+        grid-template-columns: repeat(2, 1fr); /* 手机端保持2列 */
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .scene-card h3 {
+        font-size: 15px;
+    }
+
+    .scene-card p {
+        font-size: 12px;
+    }
+
+    .scene-card-content {
+        padding: 10px;
+    }
+
+    .scene-icon {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .scene-grid {
+        grid-template-columns: 1fr; /* 极小屏幕1列 */
+        gap: 10px;
+        padding: 10px;
+    }
+}

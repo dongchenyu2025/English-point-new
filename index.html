@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Point & Learn</title>
+    <link rel="stylesheet" href="src/styles/common.css">
+    <link rel="stylesheet" href="src/styles/HomePage.css">
+    <link rel="stylesheet" href="src/styles/ScenePage.css">
+    <link rel="stylesheet" href="src/styles/ThemePage.css">
+    <link rel="stylesheet" href="src/styles/WordMarking.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Homepage will be loaded here -->
+        <div id="homepage" class="page active">
+            <!-- 主页内容将由HomePage.js动态生成 -->
+        </div>
+
+        <!-- Scene page will be loaded here -->
+        <div id="scenepage" class="page">
+            <header class="scene-header">
+                <button id="back-btn" class="back-button">←</button>
+                <h2 id="scene-title">Scene Name</h2>
+                <div class="display-controls">
+                    <button id="english-btn" class="display-btn active">英文</button>
+                    <button id="phonetic-btn" class="display-btn">音标</button>
+                    <button id="chinese-btn" class="display-btn">中文</button>
+                </div>
+            </header>
+
+            <main class="scene-container">
+                <div id="scene-image-container" class="scene-image-container">
+                    <img id="scene-image" src="" alt="Scene Image">
+                    <div id="hotspots-container"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="src/services/SceneDataService.js"></script>
+    <script src="src/services/ThemeDataService.js"></script>
+    <script src="src/services/UserProgressService.js"></script>
+    <script src="src/services/AudioService.js"></script>
+    <script src="src/utils/PerformanceMonitor.js"></script>
+    <script src="src/components/WordHotspot.js"></script>
+    <script src="src/components/DisplayController.js"></script>
+    <script src="src/components/HomePage.js"></script>
+    <script src="src/components/ScenePage.js"></script>
+    <script>
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 App initializing...');
+
+            // Initialize audio service first
+            window.audioService = new AudioService();
+            console.log('🎯 AudioService created:', window.audioService);
+
+            // Initialize theme data service
+            if (window.themeDataService) {
+                window.themeDataService.initialize();
+                console.log('🎯 ThemeDataService initialized');
+            }
+
+            // Initialize user progress service
+            if (window.userProgressService) {
+                console.log('🎯 UserProgressService initialized');
+            }
+
+            // Test TTS availability
+            if ('speechSynthesis' in window) {
+                console.log('🎯 TTS available, voices:', speechSynthesis.getVoices().length);
+
+                // 基于参考方案的简单TTS测试函数
+                window.testTTS = function(word = 'hello') {
+                    console.log('🔊 测试TTS:', word);
+
+                    if ('speechSynthesis' in window) {
+                        const utterance = new SpeechSynthesisUtterance(word);
+                        utterance.lang = 'en-US';
+                        utterance.rate = 0.8;
+                        window.speechSynthesis.speak(utterance);
+                        console.log('✅ TTS命令已发送');
+                    } else {
+                        console.log('❌ 浏览器不支持语音合成');
+                    }
+                };
+
+                // 最简单的TTS方法
+                window.simpleTTS = function(word) {
+                    console.log('🔊 最简单TTS:', word);
+                    window.speechSynthesis.speak(new SpeechSynthesisUtterance(word));
+                };
+
+                // 等待语音加载后测试
+                speechSynthesis.addEventListener('voiceschanged', () => {
+                    console.log('🎯 语音列表已加载，可用语音:', speechSynthesis.getVoices().length);
+                });
+
+            } else {
+                console.log('🎯 TTS not available');
+            }
+
+            // 预激活TTS权限 - 用户首次点击时激活
+            function initTTSPermission() {
+                if ('speechSynthesis' in window) {
+                    console.log('🔊 Initializing TTS permission on user interaction...');
+
+                    // 播放无声测试来激活TTS权限
+                    const testUtterance = new SpeechSynthesisUtterance('');
+                    testUtterance.volume = 0;
+                    testUtterance.rate = 10;
+
+                    try {
+                        speechSynthesis.speak(testUtterance);
+                        console.log('🔊 ✅ TTS permission activated');
+                    } catch (error) {
+                        console.log('🔊 ⚠️ TTS permission activation failed:', error);
+                    }
+
+                    // 移除监听器，只需要激活一次
+                    document.removeEventListener('click', initTTSPermission);
+                    document.removeEventListener('touchstart', initTTSPermission);
+                }
+            }
+
+            // 监听用户首次交互来激活TTS
+            document.addEventListener('click', initTTSPermission, { once: true });
+            document.addEventListener('touchstart', initTTSPermission, { once: true });
+
+            window.homePage = new HomePage();
+            window.scenePage = new ScenePage();
+
+            console.log('🎯 App initialization completed');
+        });
+    </script>
+</body>
+</html>

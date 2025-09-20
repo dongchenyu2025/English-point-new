@@ -1,0 +1,262 @@
+/* Word marking system styles - 基于 index-2.html 优化 */
+
+/* 单词筛选标签栏 */
+.word-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 0 16px;
+    flex-wrap: wrap;
+}
+
+.filter-tab {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    background: #e5e7eb;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-tab:hover {
+    background: #d1d5db;
+}
+
+.filter-tab.active {
+    background: #e0e7ff;
+    color: #4338ca;
+}
+
+.filter-label {
+    margin-right: 4px;
+}
+
+.filter-count {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* 热点点击波纹效果 - 修复中心对齐 */
+.hotspot-marker.clicked {
+    position: relative;
+    overflow: visible;
+}
+
+.hotspot-marker.clicked::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(79, 70, 229, 0.3);
+    transform: translate(-50%, -50%);
+    animation: ripple-effect 0.6s ease-out;
+    z-index: -1;
+}
+
+@keyframes ripple-effect {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 60px;
+        height: 60px;
+        opacity: 0;
+    }
+}
+
+/* 热点样式 - 模仿 index-2.html 的圆点设计 */
+.hotspot {
+    position: absolute;
+    pointer-events: all;
+    cursor: pointer;
+    z-index: 10;
+    width: 24px; /* 固定尺寸 */
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hotspot-marker {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #4f46e5;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0; /* 隐藏原来的 ● */
+    animation: none; /* 移除脉冲动画 */
+    position: relative;
+}
+
+.hotspot-marker::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #4f46e5;
+}
+
+/* 热点状态样式 - 更新为圆点样式 */
+.hotspot-marker.status-known {
+    border-color: #10b981 !important;
+}
+
+.hotspot-marker.status-known::after {
+    background-color: #10b981 !important;
+}
+
+.hotspot-marker.status-unknown {
+    border-color: #ef4444 !important;
+}
+
+.hotspot-marker.status-unknown::after {
+    background-color: #ef4444 !important;
+}
+
+.hotspot-marker.status-unmarked {
+    border-color: #4f46e5 !important;
+}
+
+.hotspot-marker.status-unmarked::after {
+    background-color: #4f46e5 !important;
+}
+
+/* 单词标记面板 - 优化定位和样式 */
+.marking-panel {
+    position: absolute;
+    top: 20px; /* 更靠近热点 (从30px改为20px) */
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    gap: 4px;
+    z-index: 15; /* 提高层级，确保在标签上方 */
+}
+
+.marking-panel.show {
+    display: flex;
+}
+
+.marking-btn {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: white;
+}
+
+.known-btn {
+    background: #10b981;
+}
+
+.known-btn:hover {
+    background: #059669;
+    transform: scale(1.05);
+}
+
+.unknown-btn {
+    background: #ef4444;
+}
+
+.unknown-btn:hover {
+    background: #dc2626;
+    transform: scale(1.05);
+}
+
+/* 移动设备适配 */
+@media (max-width: 768px) {
+    .word-filters {
+        gap: 6px;
+        padding: 0 12px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .word-filters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .filter-tab {
+        padding: 5px 10px;
+        font-size: 13px;
+        flex-shrink: 0;
+    }
+
+    .hotspot-marker {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    .hotspot-marker::after {
+        width: 10px;
+        height: 10px;
+    }
+
+    .marking-panel {
+        top: 35px;
+    }
+
+    .marking-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}
+
+/* 隐藏的热点 */
+.hotspot[style*="display: none"] {
+    display: none !important;
+}
+
+/* 场景页面布局调整 - 确保筛选栏正确显示 */
+.scene-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 16px;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.scene-header .scene-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.scene-header .word-filters {
+    margin-bottom: 0;
+    padding: 0;
+}
+
+@media (max-width: 768px) {
+    .scene-header .scene-title-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .scene-header #scene-title {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .scene-header .display-controls {
+        align-self: center;
+    }
+}

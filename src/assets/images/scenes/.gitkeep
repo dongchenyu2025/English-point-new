@@ -1,0 +1,16 @@
+# Scene images directory
+This directory contains scene background images for the learning environments.
+
+Images should be:
+- Format: JPG preferred
+- Size: 1200x800 pixels (3:2 aspect ratio)
+- Named using scene ID: `{sceneId}.jpg`
+
+Example:
+- kitchen.jpg
+- living.jpg
+- park.jpg
+- classroom.jpg
+- market.jpg
+
+Use the batch-image-cropper.html tool to standardize images to the correct size and aspect ratio.

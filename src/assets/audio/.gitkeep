@@ -1,0 +1,9 @@
+# Audio files directory
+This directory contains audio pronunciation files for vocabulary words.
+
+Files should be named using the pattern: `{word}.mp3` or `{word_with_underscores}.mp3`
+
+Example:
+- apple.mp3
+- kitchen_island.mp3
+- five_star_red_flag.mp3
