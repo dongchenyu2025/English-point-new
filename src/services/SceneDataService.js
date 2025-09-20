@@ -247,6 +247,90 @@ class SceneDataService {
                     }
                 ]
             },
+            take_a_flight: {
+                id: 'take_a_flight',
+                name: 'Take a flight',
+                image: 'src/assets/images/scenes/take_a_flight.jpg',
+                vocabulary: [
+                    {
+                        word: 'Passenger',
+                        phonetic: '/ˈpæsɪndʒər/',
+                        chinese: '乘客',
+                        audio: 'src/assets/audio/passenger.mp3',
+                        position: { x: '47.45%', y: '63.08%' }
+                    },
+                    {
+                        word: 'Aisle',
+                        phonetic: '/aɪl/',
+                        chinese: '过道',
+                        audio: 'src/assets/audio/aisle.mp3',
+                        position: { x: '64.94%', y: '83.75%' }
+                    },
+                    {
+                        word: 'Flight attendant',
+                        phonetic: '/ˈflaɪt əˈtendənt/',
+                        chinese: '航班空乘',
+                        audio: 'src/assets/audio/flight_attendant.mp3',
+                        position: { x: '62.32%', y: '35.75%' }
+                    },
+                    {
+                        word: 'Tray table',
+                        phonetic: '/ˈtreɪ ˈteɪbl/',
+                        chinese: '小桌板',
+                        audio: 'src/assets/audio/tray_table.mp3',
+                        position: { x: '41.03%', y: '79.08%' }
+                    },
+                    {
+                        word: 'Overhead bin',
+                        phonetic: '/ˌoʊvərˈhed bɪn/',
+                        chinese: '行李舱',
+                        audio: 'src/assets/audio/overhead_bin.mp3',
+                        position: { x: '43.08%', y: '28.91%' }
+                    }
+                ]
+            },
+            check_in: {
+                id: 'check_in',
+                name: 'Check in',
+                image: 'src/assets/images/scenes/check_in.jpg',
+                vocabulary: [
+                    {
+                        word: 'Boarding gate',
+                        phonetic: '/ˈbɔːrdɪŋ ɡeɪt/',
+                        chinese: '登机口',
+                        audio: 'src/assets/audio/boarding_gate.mp3',
+                        position: { x: '78.79%', y: '32.33%' }
+                    },
+                    {
+                        word: 'Boarding pass',
+                        phonetic: '/ˈbɔːrdɪŋ pɑːs/',
+                        chinese: '登机牌',
+                        audio: 'src/assets/audio/boarding_pass.mp3',
+                        position: { x: '48.76%', y: '39.08%' }
+                    },
+                    {
+                        word: 'Flight number',
+                        phonetic: '/flaɪt ˈnʌmbər/',
+                        chinese: '航班号',
+                        audio: 'src/assets/audio/flight_number.mp3',
+                        position: { x: '48.47%', y: '15.83%' }
+                    },
+                    {
+                        word: 'Passport',
+                        phonetic: '/ˈpæspɔːrt/',
+                        chinese: '护照',
+                        audio: 'src/assets/audio/passport.mp3',
+                        position: { x: '57.07%', y: '47.08%' }
+                    },
+                    {
+                        word: 'Checked baggage',
+                        phonetic: '/tʃekt ˈbæɡɪdʒ/',
+                        chinese: '托运行李',
+                        audio: 'src/assets/audio/checked_baggage.mp3',
+                        position: { x: '66.11%', y: '86.25%' }
+                    }
+                ]
+            },
         };
     }
 

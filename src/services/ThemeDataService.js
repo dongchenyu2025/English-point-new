@@ -23,6 +23,11 @@ class ThemeDataService {
                 name: '娱乐休闲',
                 scenes: ['park'] // 现有的休闲场景
             },
+            transportation: {
+                id: 'transportation',
+                name: '交通出行',
+                scenes: ['take_a_flight', 'check_in'] // 航空出行场景
+            },
             shopping: {
                 id: 'shopping',
                 name: '购物美食',

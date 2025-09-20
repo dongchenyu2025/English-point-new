@@ -119,7 +119,9 @@ class HomePage {
             mountain: '山脉',
             forest: '森林',
             coffee: '咖啡',
-            supermarket: '超市'
+            supermarket: '超市',
+            take_a_flight: '乘飞机',
+            check_in: '办理登机手续'
         };
         return chineseNames[sceneId] || sceneId;
     }
@@ -142,7 +144,9 @@ class HomePage {
             mountain: 'Mountain',
             forest: 'Forest',
             coffee: 'Coffee',
-            supermarket: 'Supermarket'
+            supermarket: 'Supermarket',
+            take_a_flight: 'Take a flight',
+            check_in: 'Check in'
         };
         return englishNames[sceneId] || sceneId;
     }

@@ -1,3 +1,25 @@
+场景: take_a_flight
+图片: take_a_flight.jpg
+大标题: 乘飞机
+小标题: Take a flight
+词汇:
+Passenger | /ˈpæsɪndʒər/ | 乘客 | 47.45% | 63.08%
+Aisle | /aɪl/ | 过道 | 64.94% | 83.75%
+Flight attendant | /ˈflaɪt əˈtendənt/ | 航班空乘 | 62.32% | 35.75%
+Tray table | /ˈtreɪ ˈteɪbl/ | 小桌板 | 41.03% | 79.08%
+Overhead bin | /ˌoʊvərˈhed bɪn/ | 行李舱 | 43.08% | 28.91%
+
+场景: check_in
+图片: check_in.jpg
+大标题: 办理登机手续
+小标题: Check in
+词汇:
+Boarding gate | /ˈbɔːrdɪŋ ɡeɪt/ | 登机口 | 78.79% | 32.33%
+Boarding pass | /ˈbɔːrdɪŋ pɑːs/ | 登机牌 | 48.76% | 39.08%
+Flight number | /flaɪt ˈnʌmbər/ | 航班号 | 48.47% | 15.83%
+Passport | /ˈpæspɔːrt/ | 护照 | 57.07% | 47.08%
+Checked baggage | /tʃekt ˈbæɡɪdʒ/ | 托运行李 | 66.11% | 86.25%
+
 场景: kitchen
 图片: kitchen.jpg
 大标题: 厨房
