@@ -1,29 +1,29 @@
 场景: take_a_flight
 图片: take_a_flight.jpg
 大标题: 乘飞机
-小标题: Take a flight
+小标题: take a flight
 词汇:
-Passenger | /ˈpæsɪndʒər/ | 乘客 | 47.45% | 63.08%
-Aisle | /aɪl/ | 过道 | 64.94% | 83.75%
-Flight attendant | /ˈflaɪt əˈtendənt/ | 航班空乘 | 62.32% | 35.75%
-Tray table | /ˈtreɪ ˈteɪbl/ | 小桌板 | 41.03% | 79.08%
-Overhead bin | /ˌoʊvərˈhed bɪn/ | 行李舱 | 43.08% | 28.91%
+passenger | /ˈpæsɪndʒər/ | 乘客 | 47.45% | 63.08%
+aisle | /aɪl/ | 过道 | 64.94% | 83.75%
+flight attendant | /ˈflaɪt əˈtendənt/ | 航班空乘 | 62.32% | 35.75%
+tray table | /ˈtreɪ ˈteɪbl/ | 小桌板 | 41.03% | 79.08%
+overhead bin | /ˌoʊvərˈhed bɪn/ | 行李舱 | 43.08% | 28.91%
 
 场景: check_in
 图片: check_in.jpg
 大标题: 办理登机手续
-小标题: Check in
+小标题: check in
 词汇:
-Boarding gate | /ˈbɔːrdɪŋ ɡeɪt/ | 登机口 | 78.79% | 32.33%
-Boarding pass | /ˈbɔːrdɪŋ pɑːs/ | 登机牌 | 48.76% | 39.08%
-Flight number | /flaɪt ˈnʌmbər/ | 航班号 | 48.47% | 15.83%
-Passport | /ˈpæspɔːrt/ | 护照 | 57.07% | 47.08%
-Checked baggage | /tʃekt ˈbæɡɪdʒ/ | 托运行李 | 66.11% | 86.25%
+boarding gate | /ˈbɔːrdɪŋ ɡeɪt/ | 登机口 | 78.79% | 32.33%
+boarding pass | /ˈbɔːrdɪŋ pɑːs/ | 登机牌 | 48.76% | 39.08%
+flight number | /flaɪt ˈnʌmbər/ | 航班号 | 48.47% | 15.83%
+passport | /ˈpæspɔːrt/ | 护照 | 57.07% | 47.08%
+checked baggage | /tʃekt ˈbæɡɪdʒ/ | 托运行李 | 66.11% | 86.25%
 
 场景: kitchen
 图片: kitchen.jpg
 大标题: 厨房
-小标题: Kitchen
+小标题: kitchen
 词汇:
 oven | /oven/ | oven | 30.07% | 27.50%
 pendant light | /pendant light/ | pendant light | 61.96% | 22.08%
@@ -34,53 +34,53 @@ stool | /stool/ | stool | 61.66% | 81.83%
 场景: living
 图片: living.jpg
 大标题: 客厅
-小标题: Living Room
+小标题: living room
 词汇:
-Cushion | /ˈkʊʃən/ | 靠垫 | 69.46% | 57.33%
-Blanket | /ˈblæŋkɪt/ | 毯子 | 63.63% | 79.91%
-Blind | /blaɪnd/ | 窗帘/卷帘 | 70.19% | 34.08%
-Shelf | /ʃɛlf/ | 架子 | 27.92% | 37.41%
-Rug | /rʌɡ/ | 地毯 | 28.94% | 82.66%
-Washing machine | /ˈwɑːʃɪŋ məˌʃiːn/ | 洗衣机 | 53.99% | 34.00%
+cushion | /ˈkʊʃən/ | 靠垫 | 69.46% | 57.33%
+blanket | /ˈblæŋkɪt/ | 毯子 | 63.63% | 79.91%
+blind | /blaɪnd/ | 窗帘/卷帘 | 70.19% | 34.08%
+shelf | /ʃɛlf/ | 架子 | 27.92% | 37.41%
+rug | /rʌɡ/ | 地毯 | 28.94% | 82.66%
+washing machine | /ˈwɑːʃɪŋ məˌʃiːn/ | 洗衣机 | 53.99% | 34.00%
 
 场景: park
 图片: park.jpg
 大标题: 公园
-小标题: Park
+小标题: park
 词汇:
-Bench | /bɛntʃ/ | 长椅 | 39.03% | 71.91%
-Fountain | /ˈfaʊntɪn/ | 喷泉 | 38.12% | 46.83%
-Swing | /swɪŋ/ | 秋千 | 20.80% | 55.41%
-Slide | /slaɪd/ | 滑梯 | 75.63% | 52.16%
-Lawn | /lɔːn/ | 草坪 | 61.05% | 57.16%
+bench | /bɛntʃ/ | 长椅 | 39.03% | 71.91%
+fountain | /ˈfaʊntɪn/ | 喷泉 | 38.12% | 46.83%
+swing | /swɪŋ/ | 秋千 | 20.80% | 55.41%
+slide | /slaɪd/ | 滑梯 | 75.63% | 52.16%
+lawn | /lɔːn/ | 草坪 | 61.05% | 57.16%
 
 场景: desk
 图片: desk.jpg
 大标题: 工作桌
-小标题: Desk
+小标题: desk
 词汇:
-Monitor | /ˈmɒnɪtər/ | 显示器 | 65.91% | 58.83%
-Keyboard | /ˈkiːbɔːrd/ | 键盘 | 49.81% | 89.75%
-Mouse | /maʊs/ | 鼠标 | 78.66% | 92.16%
-Headphones | /ˈhɛdˌfoʊnz/ | 耳机 | 24.45% | 63.00%
-Calendar | /ˈkæləndər/ | 日历 | 26.42% | 86.00%
+monitor | /ˈmɒnɪtər/ | 显示器 | 65.91% | 58.83%
+keyboard | /ˈkiːbɔːrd/ | 键盘 | 49.81% | 89.75%
+mouse | /maʊs/ | 鼠标 | 78.66% | 92.16%
+headphones | /ˈhɛdˌfoʊnz/ | 耳机 | 24.45% | 63.00%
+calendar | /ˈkæləndər/ | 日历 | 26.42% | 86.00%
 
 场景: coffee
 图片: coffee.jpg
 大标题: 咖啡
-小标题: Coffee
+小标题: coffee
 词汇:
-Dirty Coffee | /ˈdɜːrti ˈkɒfi/ | 脏咖啡 | 33.71% | 64.33%
-Latte | /ˈlɑːteɪ/ | 拿铁 | 59.98% | 72.50%
-Americano | /mɛrɪˈkɑːnoʊ/ | 美式咖啡 | 55.28% | 31.58%
+dirty coffee | /ˈdɜːrti ˈkɒfi/ | 脏咖啡 | 33.71% | 64.33%
+latte | /ˈlɑːteɪ/ | 拿铁 | 59.98% | 72.50%
+americano | /mɛrɪˈkɑːnoʊ/ | 美式咖啡 | 55.28% | 31.58%
 
 场景: supermarket
 图片: supermarket.jpg
 大标题: 超市
-小标题: Supermarket
+小标题: supermarket
 词汇:
-Lettuce | /ˈlɛtəs/ | 生菜 | 34.91% | 18.66%
-Cucumber | /ˈkjuːkʌmbər/ | 黄瓜 | 30.10% | 52.66%
-Bell pepper | /ˈbɛl ˌpɛpər/ | 甜椒 | 58.97% | 42.41%
-Cabbage | /ˈkæbɪdʒ/ | 卷心菜 | 70.48% | 86.50%
-Eggplant | /ˈɛɡˌplænt/ | 茄子 | 33.89% | 63.16%
+lettuce | /ˈlɛtəs/ | 生菜 | 34.91% | 18.66%
+cucumber | /ˈkjuːkʌmbər/ | 黄瓜 | 30.10% | 52.66%
+bell pepper | /ˈbɛl ˌpɛpər/ | 甜椒 | 58.97% | 42.41%
+cabbage | /ˈkæbɪdʒ/ | 卷心菜 | 70.48% | 86.50%
+eggplant | /ˈɛɡˌplænt/ | 茄子 | 33.89% | 63.16%

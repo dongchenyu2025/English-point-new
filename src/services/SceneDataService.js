@@ -50,42 +50,42 @@ class SceneDataService {
                 image: 'src/assets/images/scenes/living.jpg',
                 vocabulary: [
                     {
-                        word: 'Cushion',
+                        word: 'cushion',
                         phonetic: '/ˈkʊʃən/',
                         chinese: '靠垫',
                         audio: 'src/assets/audio/Cushion.MP3',
                         position: { x: '69.46%', y: '57.33%' }
                     },
                     {
-                        word: 'Blanket',
+                        word: 'blanket',
                         phonetic: '/ˈblæŋkɪt/',
                         chinese: '毯子',
                         audio: 'src/assets/audio/Blanket.MP3',
                         position: { x: '63.63%', y: '79.91%' }
                     },
                     {
-                        word: 'Blind',
+                        word: 'blind',
                         phonetic: '/blaɪnd/',
                         chinese: '窗帘/卷帘',
                         audio: 'src/assets/audio/Blind.MP3',
                         position: { x: '70.19%', y: '34.08%' }
                     },
                     {
-                        word: 'Shelf',
+                        word: 'shelf',
                         phonetic: '/ʃɛlf/',
                         chinese: '架子',
                         audio: 'src/assets/audio/Shelf.MP3',
                         position: { x: '27.92%', y: '37.41%' }
                     },
                     {
-                        word: 'Rug',
+                        word: 'rug',
                         phonetic: '/rʌɡ/',
                         chinese: '地毯',
                         audio: 'src/assets/audio/Rug.MP3',
                         position: { x: '28.94%', y: '82.66%' }
                     },
                     {
-                        word: 'Washing machine',
+                        word: 'washing machine',
                         phonetic: '/ˈwɑːʃɪŋ məˌʃiːn/',
                         chinese: '洗衣机',
                         audio: 'src/assets/audio/Washing_machine.MP3',
@@ -99,35 +99,35 @@ class SceneDataService {
                 image: 'src/assets/images/scenes/park.jpg',
                 vocabulary: [
                     {
-                        word: 'Bench',
+                        word: 'bench',
                         phonetic: '/bɛntʃ/',
                         chinese: '长椅',
                         audio: 'src/assets/audio/Bench.MP3',
                         position: { x: '39.03%', y: '71.91%' }
                     },
                     {
-                        word: 'Fountain',
+                        word: 'fountain',
                         phonetic: '/ˈfaʊntɪn/',
                         chinese: '喷泉',
                         audio: 'src/assets/audio/Fountain.MP3',
                         position: { x: '38.12%', y: '46.83%' }
                     },
                     {
-                        word: 'Swing',
+                        word: 'swing',
                         phonetic: '/swɪŋ/',
                         chinese: '秋千',
                         audio: 'src/assets/audio/Swing.MP3',
                         position: { x: '20.80%', y: '55.41%' }
                     },
                     {
-                        word: 'Slide',
+                        word: 'slide',
                         phonetic: '/slaɪd/',
                         chinese: '滑梯',
                         audio: 'src/assets/audio/Slide.MP3',
                         position: { x: '75.63%', y: '52.16%' }
                     },
                     {
-                        word: 'Lawn',
+                        word: 'lawn',
                         phonetic: '/lɔːn/',
                         chinese: '草坪',
                         audio: 'src/assets/audio/Lawn.MP3',
@@ -141,38 +141,38 @@ class SceneDataService {
                 image: 'src/assets/images/scenes/desk.jpg',
                 vocabulary: [
                     {
-                        word: 'Monitor',
+                        word: 'monitor',
                         phonetic: '/ˈmɒnɪtər/',
                         chinese: '显示器',
                         audio: 'src/assets/audio/Monitor.MP3',
                         position: { x: '65.91%', y: '58.83%' }
                     },
                     {
-                        word: 'Keyboard',
+                        word: 'keyboard',
                         phonetic: '/ˈkiːbɔːrd/',
                         chinese: '键盘',
                         audio: 'src/assets/audio/Keyboard.MP3',
                         position: { x: '49.81%', y: '89.75%' }
                     },
                     {
-                        word: 'Mouse',
+                        word: 'mouse',
                         phonetic: '/maʊs/',
                         chinese: '鼠标',
                         audio: 'src/assets/audio/Mouse.MP3',
                         position: { x: '78.66%', y: '92.16%' }
                     },
                     {
-                        word: 'Headphones',
+                        word: 'headphones',
                         phonetic: '/ˈhɛdˌfoʊnz/',
                         chinese: '耳机',
                         audio: 'src/assets/audio/Headphones.MP3',
                         position: { x: '24.45%', y: '63.00%' }
                     },
                     {
-                        word: 'Calendar',
+                        word: 'calendar',
                         phonetic: '/ˈkæləndər/',
                         chinese: '日历',
-                        audio: 'src/assets/audio/Calendar.MP3',
+                        audio: 'src/assets/audio/calendar.MP3',
                         position: { x: '26.42%', y: '86.00%' }
                     }
                 ]
@@ -183,24 +183,24 @@ class SceneDataService {
                 image: 'src/assets/images/scenes/coffee.jpg',
                 vocabulary: [
                     {
-                        word: 'Dirty Coffee',
+                        word: 'dirty coffee',
                         phonetic: '/ˈdɜːrti ˈkɒfi/',
                         chinese: '脏咖啡',
-                        audio: 'src/assets/audio/Dirty_Coffee.MP3',
+                        audio: 'src/assets/audio/dirty_Coffee.MP3',
                         position: { x: '33.71%', y: '64.33%' }
                     },
                     {
-                        word: 'Latte',
+                        word: 'latte',
                         phonetic: '/ˈlɑːteɪ/',
                         chinese: '拿铁',
-                        audio: 'src/assets/audio/Latte.MP3',
+                        audio: 'src/assets/audio/latte.MP3',
                         position: { x: '59.98%', y: '72.50%' }
                     },
                     {
-                        word: 'Americano',
+                        word: 'americano',
                         phonetic: '/mɛrɪˈkɑːnoʊ/',
                         chinese: '美式咖啡',
-                        audio: 'src/assets/audio/Americano.MP3',
+                        audio: 'src/assets/audio/americano.MP3',
                         position: { x: '55.28%', y: '31.58%' }
                     }
                 ]
@@ -211,38 +211,38 @@ class SceneDataService {
                 image: 'src/assets/images/scenes/supermarket.jpg',
                 vocabulary: [
                     {
-                        word: 'Lettuce',
+                        word: 'lettuce',
                         phonetic: '/ˈlɛtəs/',
                         chinese: '生菜',
-                        audio: 'src/assets/audio/Lettuce.MP3',
+                        audio: 'src/assets/audio/lettuce.MP3',
                         position: { x: '34.91%', y: '18.66%' }
                     },
                     {
-                        word: 'Cucumber',
+                        word: 'cucumber',
                         phonetic: '/ˈkjuːkʌmbər/',
                         chinese: '黄瓜',
-                        audio: 'src/assets/audio/Cucumber.MP3',
+                        audio: 'src/assets/audio/cucumber.MP3',
                         position: { x: '30.10%', y: '52.66%' }
                     },
                     {
-                        word: 'Bell pepper',
+                        word: 'bell pepper',
                         phonetic: '/ˈbɛl ˌpɛpər/',
                         chinese: '甜椒',
                         audio: 'src/assets/audio/bell_pepper.MP3',
                         position: { x: '58.97%', y: '42.41%' }
                     },
                     {
-                        word: 'Cabbage',
+                        word: 'cabbage',
                         phonetic: '/ˈkæbɪdʒ/',
                         chinese: '卷心菜',
-                        audio: 'src/assets/audio/Cabbage.MP3',
+                        audio: 'src/assets/audio/cabbage.MP3',
                         position: { x: '70.48%', y: '86.50%' }
                     },
                     {
-                        word: 'Eggplant',
+                        word: 'eggplant',
                         phonetic: '/ˈɛɡˌplænt/',
                         chinese: '茄子',
-                        audio: 'src/assets/audio/Eggplant.MP3',
+                        audio: 'src/assets/audio/eggplant.MP3',
                         position: { x: '33.89%', y: '63.16%' }
                     }
                 ]
@@ -253,38 +253,38 @@ class SceneDataService {
                 image: 'src/assets/images/scenes/take_a_flight.jpg',
                 vocabulary: [
                     {
-                        word: 'Passenger',
+                        word: 'passenger',
                         phonetic: '/ˈpæsɪndʒər/',
                         chinese: '乘客',
-                        audio: 'src/assets/audio/Passenger.MP3',
+                        audio: 'src/assets/audio/passenger.MP3',
                         position: { x: '47.45%', y: '63.08%' }
                     },
                     {
-                        word: 'Aisle',
+                        word: 'aisle',
                         phonetic: '/aɪl/',
                         chinese: '过道',
-                        audio: 'src/assets/audio/Aisle.MP3',
+                        audio: 'src/assets/audio/aisle.MP3',
                         position: { x: '64.94%', y: '83.75%' }
                     },
                     {
-                        word: 'Flight attendant',
+                        word: 'flight attendant',
                         phonetic: '/ˈflaɪt əˈtendənt/',
                         chinese: '航班空乘',
-                        audio: 'src/assets/audio/Flight_attendant.MP3',
+                        audio: 'src/assets/audio/flight_attendant.MP3',
                         position: { x: '62.32%', y: '35.75%' }
                     },
                     {
-                        word: 'Tray table',
+                        word: 'tray table',
                         phonetic: '/ˈtreɪ ˈteɪbl/',
                         chinese: '小桌板',
-                        audio: 'src/assets/audio/Tray_table.MP3',
+                        audio: 'src/assets/audio/tray_table.MP3',
                         position: { x: '41.03%', y: '79.08%' }
                     },
                     {
-                        word: 'Overhead bin',
+                        word: 'overhead bin',
                         phonetic: '/ˌoʊvərˈhed bɪn/',
                         chinese: '行李舱',
-                        audio: 'src/assets/audio/Overhead_bin.MP3',
+                        audio: 'src/assets/audio/overhead_bin.MP3',
                         position: { x: '43.08%', y: '28.91%' }
                     }
                 ]
@@ -295,38 +295,38 @@ class SceneDataService {
                 image: 'src/assets/images/scenes/check_in.jpg',
                 vocabulary: [
                     {
-                        word: 'Boarding gate',
+                        word: 'boarding gate',
                         phonetic: '/ˈbɔːrdɪŋ ɡeɪt/',
                         chinese: '登机口',
-                        audio: 'src/assets/audio/Boarding_gate.MP3',
+                        audio: 'src/assets/audio/boarding_gate.MP3',
                         position: { x: '78.79%', y: '32.33%' }
                     },
                     {
-                        word: 'Boarding pass',
+                        word: 'boarding pass',
                         phonetic: '/ˈbɔːrdɪŋ pɑːs/',
                         chinese: '登机牌',
-                        audio: 'src/assets/audio/Boarding_pass.MP3',
+                        audio: 'src/assets/audio/boarding_pass.MP3',
                         position: { x: '48.76%', y: '39.08%' }
                     },
                     {
-                        word: 'Flight number',
+                        word: 'flight number',
                         phonetic: '/flaɪt ˈnʌmbər/',
                         chinese: '航班号',
-                        audio: 'src/assets/audio/Flight_number.MP3',
+                        audio: 'src/assets/audio/flight_number.MP3',
                         position: { x: '48.47%', y: '15.83%' }
                     },
                     {
-                        word: 'Passport',
+                        word: 'passport',
                         phonetic: '/ˈpæspɔːrt/',
                         chinese: '护照',
-                        audio: 'src/assets/audio/Passport.MP3',
+                        audio: 'src/assets/audio/passport.MP3',
                         position: { x: '57.07%', y: '47.08%' }
                     },
                     {
-                        word: 'Checked baggage',
+                        word: 'checked baggage',
                         phonetic: '/tʃekt ˈbæɡɪdʒ/',
                         chinese: '托运行李',
-                        audio: 'src/assets/audio/Checked_baggage.MP3',
+                        audio: 'src/assets/audio/checked_baggage.MP3',
                         position: { x: '66.11%', y: '86.25%' }
                     }
                 ]
