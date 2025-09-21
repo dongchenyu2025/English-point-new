@@ -247,10 +247,10 @@ class SceneDataService {
                     }
                 ]
             },
-            take_a_flight: {
-                id: 'take_a_flight',
+            takeaflight: {
+                id: 'takeaflight',
                 name: 'Take a flight',
-                image: '/src/assets/images/scenes/take_a_flight.jpg',
+                image: '/src/assets/images/scenes/takeaflight.jpg',
                 vocabulary: [
                     {
                         word: 'passenger',
@@ -289,10 +289,10 @@ class SceneDataService {
                     }
                 ]
             },
-            check_in: {
-                id: 'check_in',
+            checkin: {
+                id: 'checkin',
                 name: 'Check in',
-                image: '/src/assets/images/scenes/check_in.jpg',
+                image: '/src/assets/images/scenes/checkin.jpg',
                 vocabulary: [
                     {
                         word: 'boarding gate',
