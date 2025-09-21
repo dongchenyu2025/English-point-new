@@ -5,7 +5,7 @@ class SceneDataService {
             kitchen: {
                 id: 'kitchen',
                 name: 'Kitchen',
-                image: '/src/assets/images/scenes/kitchen.jpg',
+                image: 'src/assets/images/scenes/kitchen.jpg',
                 vocabulary: [
                     {
                         word: 'oven',
@@ -47,7 +47,7 @@ class SceneDataService {
             living: {
                 id: 'living',
                 name: 'Living Room',
-                image: '/src/assets/images/scenes/living.jpg',
+                image: 'src/assets/images/scenes/living.jpg',
                 vocabulary: [
                     {
                         word: 'cushion',
@@ -96,7 +96,7 @@ class SceneDataService {
             park: {
                 id: 'park',
                 name: 'Park',
-                image: '/src/assets/images/scenes/park.jpg',
+                image: 'src/assets/images/scenes/park.jpg',
                 vocabulary: [
                     {
                         word: 'bench',
@@ -138,7 +138,7 @@ class SceneDataService {
             desk: {
                 id: 'desk',
                 name: 'Desk',
-                image: '/src/assets/images/scenes/desk.jpg',
+                image: 'src/assets/images/scenes/desk.jpg',
                 vocabulary: [
                     {
                         word: 'monitor',
@@ -180,7 +180,7 @@ class SceneDataService {
             coffee: {
                 id: 'coffee',
                 name: 'Coffee',
-                image: '/src/assets/images/scenes/coffee.jpg',
+                image: 'src/assets/images/scenes/coffee.jpg',
                 vocabulary: [
                     {
                         word: 'dirty coffee',
@@ -208,7 +208,7 @@ class SceneDataService {
             supermarket: {
                 id: 'supermarket',
                 name: 'Supermarket',
-                image: '/src/assets/images/scenes/supermarket.jpg',
+                image: 'src/assets/images/scenes/supermarket.jpg',
                 vocabulary: [
                     {
                         word: 'lettuce',
@@ -250,7 +250,7 @@ class SceneDataService {
             takeaflight: {
                 id: 'takeaflight',
                 name: 'Take a flight',
-                image: '/src/assets/images/scenes/takeaflight.jpg',
+                image: 'src/assets/images/scenes/takeaflight.jpg',
                 vocabulary: [
                     {
                         word: 'passenger',
@@ -292,7 +292,7 @@ class SceneDataService {
             checkin: {
                 id: 'checkin',
                 name: 'Check in',
-                image: '/src/assets/images/scenes/checkin.jpg',
+                image: 'src/assets/images/scenes/checkin.jpg',
                 vocabulary: [
                     {
                         word: 'boarding gate',

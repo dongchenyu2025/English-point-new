@@ -74,7 +74,7 @@ class HomePage {
         card.dataset.scene = scene.id;
 
         // 获取场景图片路径
-        const imagePath = `/src/assets/images/scenes/${scene.id}.jpg`;
+        const imagePath = `src/assets/images/scenes/${scene.id}.jpg`;
 
         // 确定进度颜色类
         let progressClass = 'progress-in-progress';

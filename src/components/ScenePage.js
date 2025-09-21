@@ -156,7 +156,7 @@ class ScenePage {
 
     async loadSceneImage() {
         const sceneId = this.currentScene?.id || 'default';
-        const realImagePath = `/src/assets/images/scenes/${sceneId}.jpg`;
+        const realImagePath = `src/assets/images/scenes/${sceneId}.jpg`;
 
         this.showImageLoadingIndicator();
 
