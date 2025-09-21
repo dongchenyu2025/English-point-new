@@ -87,8 +87,14 @@ class AudioService {
                 `./src/assets/audio/${word}.mp3`,
                 `./src/assets/audio/${word.replace(' ', '_')}.MP3`,
                 `./src/assets/audio/${word.replace(' ', '_')}.mp3`,
-                `./src/assets/audio/${word.replace(' ', ' _')}.MP3`,
-                `./src/assets/audio/${word.replace(' ', ' _')}.mp3`
+                `./src/assets/audio/${word.toLowerCase()}.MP3`,
+                `./src/assets/audio/${word.toLowerCase()}.mp3`,
+                `./src/assets/audio/${word.toLowerCase().replace(' ', '_')}.MP3`,
+                `./src/assets/audio/${word.toLowerCase().replace(' ', '_')}.mp3`,
+                `./src/assets/audio/${word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()}.MP3`,
+                `./src/assets/audio/${word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()}.mp3`,
+                `./src/assets/audio/${word.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('_')}.MP3`,
+                `./src/assets/audio/${word.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('_')}.mp3`
             ];
 
             let attempts = 0;

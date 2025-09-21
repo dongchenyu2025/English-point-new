@@ -26,7 +26,7 @@ class ThemeDataService {
             transportation: {
                 id: 'transportation',
                 name: '交通出行',
-                scenes: ['takeaflight', 'checkin'] // 航空出行场景
+                scenes: ['take_a_flight', 'check_in'] // 航空出行场景
             },
             shopping: {
                 id: 'shopping',
