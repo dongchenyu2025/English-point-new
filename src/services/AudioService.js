@@ -16,7 +16,7 @@ class AudioService {
         return this.audioCache.get(audioUrl);
     }
 
-    // Play audio with error handling - LOCAL AUDIO FIRST
+    // Play audio with error handling - YOUDAO API FIRST
     async playAudio(audioUrlOrWord, hotspotElement = null) {
         try {
             // Extract word from URL or use the word directly
@@ -35,17 +35,27 @@ class AudioService {
 
             let audioPlayed = false;
 
-            // PRIORITY 1: Try local audio files first from audio folder
+            // PRIORITY 1: Try Youdao pronunciation API first (American pronunciation)
             if (word) {
                 try {
-                    console.log('🔊 AudioService: Trying local audio first for:', word);
+                    console.log('🔊 AudioService: Trying Youdao API first for:', word);
+                    audioPlayed = await this.tryYoudaoAudio(word);
+                } catch (error) {
+                    console.warn('🔊 AudioService: Youdao API failed, trying local audio:', error);
+                }
+            }
+
+            // PRIORITY 2: Fallback to local audio files
+            if (!audioPlayed && word) {
+                try {
+                    console.log('🔊 AudioService: Trying local audio for:', word);
                     audioPlayed = await this.tryLocalAudio(word);
                 } catch (error) {
                     console.warn('🔊 AudioService: Local audio failed, trying provided URL:', error);
                 }
             }
 
-            // PRIORITY 2: Fallback to provided audio URL if local fails
+            // PRIORITY 3: Fallback to provided audio URL
             if (!audioPlayed && audioUrlOrWord && audioUrlOrWord.includes('/')) {
                 try {
                     console.log('🔊 AudioService: Trying provided audio URL for:', audioUrlOrWord);
@@ -55,7 +65,7 @@ class AudioService {
                 }
             }
 
-            // PRIORITY 3: Final fallback to TTS
+            // PRIORITY 4: Final fallback to TTS
             if (!audioPlayed && word && 'speechSynthesis' in window) {
                 try {
                     console.log('🔊 AudioService: Using TTS fallback for:', word);
@@ -76,6 +86,65 @@ class AudioService {
             this.showErrorFeedback();
             return false;
         }
+    }
+
+    // Try to play audio using Youdao pronunciation API (American pronunciation)
+    async tryYoudaoAudio(word) {
+        return new Promise((resolve) => {
+            try {
+                // Encode the word for URL
+                const encodedWord = encodeURIComponent(word.trim());
+                // Use type=2 for American pronunciation
+                const youdaoUrl = `https://dict.youdao.com/dictvoice?audio=${encodedWord}&type=2`;
+
+                console.log('🔊 Youdao API URL:', youdaoUrl);
+
+                const audio = new Audio(youdaoUrl);
+                let resolved = false;
+
+                const timeout = setTimeout(() => {
+                    if (!resolved) {
+                        resolved = true;
+                        console.warn('🔊 Youdao API timeout for:', word);
+                        resolve(false);
+                    }
+                }, 5000); // 5 second timeout
+
+                audio.oncanplaythrough = () => {
+                    if (!resolved) {
+                        audio.play().then(() => {
+                            clearTimeout(timeout);
+                            resolved = true;
+                            console.log('🔊 Successfully played Youdao audio for:', word);
+                            resolve(true);
+                        }).catch((error) => {
+                            clearTimeout(timeout);
+                            if (!resolved) {
+                                resolved = true;
+                                console.warn('🔊 Youdao audio play failed:', error);
+                                resolve(false);
+                            }
+                        });
+                    }
+                };
+
+                audio.onerror = (error) => {
+                    clearTimeout(timeout);
+                    if (!resolved) {
+                        resolved = true;
+                        console.warn('🔊 Youdao audio error:', error);
+                        resolve(false);
+                    }
+                };
+
+                // Start loading the audio
+                audio.load();
+
+            } catch (error) {
+                console.warn('🔊 Youdao API exception:', error);
+                resolve(false);
+            }
+        });
     }
 
     // Try to play audio from local audio folder

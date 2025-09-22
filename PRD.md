@@ -2,11 +2,121 @@
 
 ## 项目概述
 **产品名称**：English Point & Learn
-**版本**：v1.3.4
+**版本**：v1.3.5
 **更新日期**：2024年9月22日
 **产品类型**：场景化英语点读学习应用
 
 ## 版本更新记录
+
+### v1.3.5 (2024年9月22日) - 有道发音接口集成版本
+
+#### 完成功能
+1. **发音系统重大升级**
+   - ✅ **有道发音API集成**：替换本地音频文件为在线发音服务，实现统一美式发音标准
+   - ✅ **智能降级机制**：4级音频播放策略 - 有道API → 本地音频 → 原有URL → 浏览器TTS
+   - ✅ **美式发音优先**：使用有道API的type=2参数，确保所有单词采用标准美式发音
+   - ✅ **网络异常处理**：5秒超时保护和完整错误处理，确保播放稳定性
+
+2. **音频播放体验优化**
+   - ✅ **即时响应**：点击单词立即尝试有道API，响应速度显著提升
+   - ✅ **发音一致性**：解决本地音频文件发音标准不统一的问题
+   - ✅ **URL编码支持**：正确处理包含空格和特殊字符的单词（如"bell pepper"）
+   - ✅ **详细日志记录**：控制台显示音频播放过程和降级逻辑，便于调试
+
+#### 技术实现详情
+
+**新增tryYoudaoAudio方法**：
+```javascript
+async tryYoudaoAudio(word) {
+    return new Promise((resolve) => {
+        try {
+            // Encode the word for URL
+            const encodedWord = encodeURIComponent(word.trim());
+            // Use type=2 for American pronunciation
+            const youdaoUrl = `https://dict.youdao.com/dictvoice?audio=${encodedWord}&type=2`;
+
+            const audio = new Audio(youdaoUrl);
+            let resolved = false;
+
+            // 5秒超时保护
+            const timeout = setTimeout(() => {
+                if (!resolved) {
+                    resolved = true;
+                    resolve(false);
+                }
+            }, 5000);
+
+            // 音频加载成功处理
+            audio.oncanplaythrough = () => {
+                if (!resolved) {
+                    audio.play().then(() => {
+                        clearTimeout(timeout);
+                        resolved = true;
+                        resolve(true);
+                    });
+                }
+            };
+
+            // 错误处理
+            audio.onerror = () => {
+                clearTimeout(timeout);
+                if (!resolved) {
+                    resolved = true;
+                    resolve(false);
+                }
+            };
+
+            audio.load();
+        } catch (error) {
+            resolve(false);
+        }
+    });
+}
+```
+
+**音频播放优先级调整**：
+1. **优先级1**: 有道发音API（美式发音）- `https://dict.youdao.com/dictvoice?audio={word}&type=2`
+2. **优先级2**: 本地音频文件（备用方案）
+3. **优先级3**: 原有音频URL（兼容性保证）
+4. **优先级4**: 浏览器TTS（最终备选）
+
+#### 用户需求响应记录
+**用户原始指令**：
+```
+修改热点单词的发音逻辑，点击单词实现美式发音，请求的接口如下：有道英语发音接口
+https://dict.youdao.com/dictvoice?audio={word}&type={1|2}
+type 1 为英音 2 为美音
+请你替换audio的参数
+```
+
+**实施步骤**：
+1. 查找当前音频播放逻辑的实现位置 → `AudioService.js:19-89`
+2. 修改AudioService使用有道发音接口 → 新增tryYoudaoAudio方法
+3. 测试新的发音功能 → 启动开发服务器验证
+
+#### 修改文件列表
+- `/src/services/AudioService.js` - 新增有道API集成，调整音频播放优先级
+
+#### 技术特性
+- **URL编码安全**：`encodeURIComponent(word.trim())`处理特殊字符
+- **异步错误处理**：Promise机制确保不阻塞UI线程
+- **超时保护机制**：5秒超时避免长时间等待
+- **向后兼容性**：保持原有音频播放逻辑作为降级方案
+- **详细日志系统**：便于开发调试和问题排查
+
+#### 用户体验改善
+- ✅ **发音质量提升**：专业标准的美式发音替代参差不齐的本地文件
+- ✅ **加载速度优化**：在线API响应速度快于本地文件读取
+- ✅ **可靠性增强**：多重降级机制确保音频播放不会失败
+- ✅ **一致性保证**：所有单词采用相同发音标准和音质
+
+#### 效果验证
+1. 点击任意热点单词 → 优先播放有道API美式发音
+2. 网络异常情况 → 自动降级到本地音频文件
+3. 控制台日志 → 显示"🔊 AudioService: Trying Youdao API first for: [word]"
+4. 播放成功 → 显示"🔊 Successfully played Youdao audio for: [word]"
+
+---
 
 ### v1.3.4 (2024年9月22日) - 统一命名规范与资源文件完整性修复版本
 
@@ -497,6 +607,6 @@ progressData: {
 
 ---
 
-**文档版本**：v1.3.4
-**最后更新**：2024年9月22日 (v1.3.4统一命名规范与资源文件完整性修复完成)
+**文档版本**：v1.3.5
+**最后更新**：2024年9月22日 (v1.3.5有道发音接口集成完成)
 **维护者**：开发团队

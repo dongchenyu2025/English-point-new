@@ -155,7 +155,149 @@ ls -la src/assets/audio/ | grep -i "target_word"
 - `/PRD.md` - 产品需求文档
 - `/CLAUDE.md` - Claude协作记录（本文件）
 
+### 2024年9月22日 - 有道发音接口集成（美式发音优先）
+
+#### 用户需求
+用户要求修改热点单词的发音逻辑，点击单词实现美式发音，使用有道英语发音接口：
+- 接口地址：`https://dict.youdao.com/dictvoice?audio={word}&type={1|2}`
+- type 1 为英音，type 2 为美音
+- 要求使用美式发音（type=2）
+
+#### 问题分析
+1. **当前音频优先级不合理**：本地音频文件优先级最高，但可能缺失或质量不一致
+2. **缺乏在线发音服务**：仅依赖本地文件和浏览器TTS，用户体验受限
+3. **发音标准不统一**：需要统一使用美式发音标准
+
+#### 解决方案
+1. **调整音频播放优先级**：
+   - 优先级1：有道发音API（美式发音）
+   - 优先级2：本地音频文件（备用）
+   - 优先级3：原有音频URL（兼容性）
+   - 优先级4：浏览器TTS（最终备选）
+
+2. **新增tryYoudaoAudio方法**：
+   - URL编码处理：`encodeURIComponent(word.trim())`
+   - 美式发音：`type=2`
+   - 超时机制：5秒超时保护
+   - 错误处理：完整的异常捕获和降级
+
+#### 技术实现
+
+**AudioService.js** - 新增有道API方法：
+```javascript
+// Try to play audio using Youdao pronunciation API (American pronunciation)
+async tryYoudaoAudio(word) {
+    return new Promise((resolve) => {
+        try {
+            // Encode the word for URL
+            const encodedWord = encodeURIComponent(word.trim());
+            // Use type=2 for American pronunciation
+            const youdaoUrl = `https://dict.youdao.com/dictvoice?audio=${encodedWord}&type=2`;
+
+            const audio = new Audio(youdaoUrl);
+            let resolved = false;
+
+            const timeout = setTimeout(() => {
+                if (!resolved) {
+                    resolved = true;
+                    console.warn('🔊 Youdao API timeout for:', word);
+                    resolve(false);
+                }
+            }, 5000); // 5 second timeout
+
+            audio.oncanplaythrough = () => {
+                if (!resolved) {
+                    audio.play().then(() => {
+                        clearTimeout(timeout);
+                        resolved = true;
+                        console.log('🔊 Successfully played Youdao audio for:', word);
+                        resolve(true);
+                    }).catch(() => {
+                        clearTimeout(timeout);
+                        if (!resolved) {
+                            resolved = true;
+                            resolve(false);
+                        }
+                    });
+                }
+            };
+
+            audio.onerror = () => {
+                clearTimeout(timeout);
+                if (!resolved) {
+                    resolved = true;
+                    resolve(false);
+                }
+            };
+
+            audio.load();
+        } catch (error) {
+            console.warn('🔊 Youdao API exception:', error);
+            resolve(false);
+        }
+    });
+}
+```
+
+**AudioService.js** - 优先级调整：
+```javascript
+// PRIORITY 1: Try Youdao pronunciation API first (American pronunciation)
+if (word) {
+    try {
+        console.log('🔊 AudioService: Trying Youdao API first for:', word);
+        audioPlayed = await this.tryYoudaoAudio(word);
+    } catch (error) {
+        console.warn('🔊 AudioService: Youdao API failed, trying local audio:', error);
+    }
+}
+
+// PRIORITY 2: Fallback to local audio files
+if (!audioPlayed && word) {
+    try {
+        console.log('🔊 AudioService: Trying local audio for:', word);
+        audioPlayed = await this.tryLocalAudio(word);
+    } catch (error) {
+        console.warn('🔊 AudioService: Local audio failed, trying provided URL:', error);
+    }
+}
+```
+
+#### 修改文件列表
+- `/src/services/AudioService.js` - 新增有道API集成和优先级调整
+
+#### 执行指令记录
+```bash
+# 用户输入指令
+修改热点单词的发音逻辑，点击单词实现美式发音，请求的接口如下：有道英语发音接口
+https://dict.youdao.com/dictvoice?audio={word}&type={1|2}
+type 1 为英音 2 为美音
+请你替换audio的参数
+
+# 技术实现步骤
+1. 查找当前音频播放逻辑的实现位置
+2. 修改AudioService使用有道发音接口
+3. 测试新的发音功能
+
+# 启动测试服务器
+python3 -m http.server 8002
+```
+
+#### 功能特性
+- ✅ 有道API美式发音优先
+- ✅ 智能降级机制
+- ✅ URL编码支持特殊字符
+- ✅ 5秒超时保护
+- ✅ 完整错误处理
+- ✅ 保持向后兼容
+
+#### 效果验证
+1. 点击任意热点单词，优先播放有道API美式发音
+2. API失败时自动降级到本地音频
+3. 控制台显示详细的音频播放日志
+4. 用户体验：统一、清晰的美式发音
+
 ---
 
 **更新时间**：2024年9月22日
+**当前版本**：v1.3.5
 **Claude 版本**：Sonnet 4
